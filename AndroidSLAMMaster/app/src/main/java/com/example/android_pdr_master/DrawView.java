@@ -27,6 +27,8 @@ public class DrawView extends View {
             canvas.drawLine(PositionSet.get(start).getX(),PositionSet.get(start).getY(),PositionSet.get(end).getX(),PositionSet.get(end).getY(),p);
         }
 
+        canvas.drawText("start",PositionSet.get(0).getX(),PositionSet.get(0).getY(),p);
+        canvas.drawText("end",PositionSet.get(PositionSet.size()-1).getX(),PositionSet.get(PositionSet.size()-1).getY(),p);
     }
 
 }

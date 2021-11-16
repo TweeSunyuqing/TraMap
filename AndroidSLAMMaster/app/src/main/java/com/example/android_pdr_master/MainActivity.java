@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTxtValue2;
     private TextView mTxtValue3;
     private Button mGenerateButton;
+    private Button mRemoveButton;
     private LinearLayout mLayout;
 
     StepDetectionHandler sdh;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mTxtValue2 = findViewById(R.id.txt_value2);
         mTxtValue3 = findViewById(R.id.txt_value3);
         mGenerateButton = findViewById(R.id.generateButton);
+        mRemoveButton = findViewById(R.id.removeButton);
         mLayout = findViewById(R.id.root);
 
         lKloc = new LocationHandler(0.0, 0.0);
@@ -66,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 init();
+            }
+        });
+
+        mRemoveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLayout.removeAllViewsInLayout();
             }
         });
     }
@@ -95,14 +104,14 @@ public class MainActivity extends AppCompatActivity {
                 mTxtValue2.setText(String.valueOf(360-dah.orientationVals[0]-90));
                 mTxtValue3.setText("走过的步数：" + String.valueOf(stepCounter));
 
-                PositionSet.add(CoordianteTrans(new Position(newloc.getxAxis().floatValue()*10,newloc.getyAxis().floatValue()*10)));
+                PositionSet.add(CoordianteTrans(new Position(newloc.getxAxis().floatValue(),newloc.getyAxis().floatValue())));
             }
         }
     };
 
     //坐标转换
     private Position CoordianteTrans(Position position){
-        Position newPosition = new Position(position.getX()+LayoutWidth/2,position.getY()+LayoutHeight/2);
+        Position newPosition = new Position(position.getX()*50+LayoutWidth/2,position.getY()*50+LayoutHeight/2);
         System.out.println("newPosition"+newPosition.getX()+" "+ newPosition.getY());
         return newPosition;
     }
