@@ -39,7 +39,7 @@
         android:id="@+id/root"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:background="@color/purple_200"
+        android:background="@drawable/labmap"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
