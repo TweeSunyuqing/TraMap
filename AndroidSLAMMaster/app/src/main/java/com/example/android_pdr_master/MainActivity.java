@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     int stepCounter = 0;
 
     private List<Position> PositionSet;
-    final private int LayoutWidth = 400;
-    final private int LayoutHeight = 400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mLayout.removeAllViewsInLayout();
+                sph.setmCurrentLocation(lKloc);
+                stepCounter = 0;
             }
         });
     }
@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
             LocationHandler newloc = sph.computeNextStep(stepSize, dah.orientationVals[0]);
             Log.d("LATLNG", newloc.getxAxis() + " " + newloc.getyAxis()+ " " + dah.orientationVals[0]);
             if (isWalking) {
-                mTxtValue1.setText("最新位置：" + String.valueOf(newloc.getxAxis())+","+String.valueOf(newloc.getyAxis()));
+                mTxtValue1.setText("最新位置：" + newloc.getxAxis() +","+ newloc.getyAxis());
                 mTxtValue2.setText(String.valueOf(360-dah.orientationVals[0]-90));
-                mTxtValue3.setText("走过的步数：" + String.valueOf(stepCounter));
+                mTxtValue3.setText("步数：" + stepCounter);
 
                 PositionSet.add(CoordianteTrans(new Position(newloc.getxAxis().floatValue(),newloc.getyAxis().floatValue())));
             }
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     //坐标转换
     private Position CoordianteTrans(Position position){
-        Position newPosition = new Position(position.getX()*50+LayoutWidth/2,position.getY()*50+LayoutHeight/2);
+        Position newPosition = new Position(position.getX()*80/3+600,position.getY()*80/3+960);
         System.out.println("newPosition"+newPosition.getX()+" "+ newPosition.getY());
         return newPosition;
     }
